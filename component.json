@@ -1,0 +1,10 @@
+{
+  "name": "enme-widget",
+  "version": "0.0.1",
+  "dependencies": {
+    "requirejs-domready": "~2.0.1",
+    "almond": "~0.2.5",
+    "requirejs": "~2.1.8"
+  },
+  "devDependencies": {}
+}
