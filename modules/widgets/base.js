@@ -1,4 +1,4 @@
-define(['modules/util/env'], function (env) {
+define(['modules/util/iframe', 'modules/util/env'], function (iframe, env) {
 
     "use strict";
 

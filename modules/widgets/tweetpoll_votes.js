@@ -1,4 +1,4 @@
-define('tweetpoll_votes', function () {
+define(['modules/widgets/base'], function (base) {
     //Do setup work here
 
     return {}

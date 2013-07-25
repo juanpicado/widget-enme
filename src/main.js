@@ -12,6 +12,8 @@ if (!window.__enme_widget) {
 
         window.__enme_widget = window.__enme_widget || {};
 
+        window.__enme_widget = window.__enme_widget || {}, __enme_widget.host = __enme_widget.host || "platform.twitter.com";
+
         // var domain = "http://localhost:8080/encuestame",
         // poll_form = "/api/jsonp/poll/embedded",
         // tp_poll_form = "/api/jsonp/tweetpoll/embedded",
@@ -51,7 +53,10 @@ if (!window.__enme_widget) {
           services,
           jsonp) {
 
-          console.log("prddoo", poll_form);
+          // on dom is ready
+          domReady(function () {
+
+          });
 
       });
 

@@ -1,5 +1,4 @@
-define('poll_form', function () {
-    //Do setup work here
+define(['modules/widgets/base'], function (base) {
 
-    return {}
+    return {};
 });

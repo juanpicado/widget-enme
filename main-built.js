@@ -1786,41 +1786,121 @@ define('components/requirejs-domready/domReady',[],function () {
 
 define("components/underscore/underscore", function(){});
 
-define('poll_form', [],function () {
+define('env', [],function () {
+
+    
+
+    var fn = {
+
+        retina: function() {
+            return (window.devicePixelRatio || Math.round(window.screen.availWidth / document.documentElement.clientWidth)) > 1
+        },
+
+        anyIE: function() {
+            return /MSIE \d/.test(f);
+        },
+
+        ie6: function () {
+            return /MSIE 6/.test(f)
+        },
+
+        ie7: function() {
+            return /MSIE 7/.test(f)
+        },
+
+        touch: function() {
+            return "ontouchstart" in window || /Opera Mini/.test(f) || navigator.msMaxTouchPoints > 0
+        },
+
+        cssTransitions: function(){
+            var a = document.body.style;
+            return a.transition !== undefined || a.webkitTransition !== undefined || a.mozTransition !== undefined || a.oTransition !== undefined || a.msTransition !== undefined;
+        }
+
+    };
+
+    return fn;
+});
+define("modules/util/env", function(){});
+
+define('modules/util/iframe',['modules/util/env'], function (env) {
+
+    
+
+    var fn = {
+
+        /**
+         * Create the iframe body
+         * @method
+         */
+        createIframeBody: function(widget) {
+            var iframe;
+                try {
+                    iframe = document.createElement('<iframe name="' + widget.name + '"></iframe>');
+                } catch (f) {
+                    iframe = document.createElement("iframe");
+                }
+            iframe.scrolling = "no";
+            iframe.allowtransparency = "true";
+            iframe.setAttribute("frameBorder", 0);
+            iframe.setAttribute("allowTransparency", !0);
+            return iframe;
+        }
+    };
+
+    return fn;
+});
+define('modules/widgets/base',['modules/util/iframe', 'modules/util/env'], function (iframe, env) {
+
+    
+
+    var fn = {
+
+        /**
+         * Create the iframe body
+         * @method
+         */
+        createIframeBody: function(widget) {
+            var iframe;
+                try {
+                    iframe = document.createElement('<iframe name="' + widget.name + '"></iframe>');
+                } catch (f) {
+                    iframe = document.createElement("iframe");
+                }
+            iframe.scrolling = "no";
+            iframe.allowtransparency = "true";
+            iframe.setAttribute("frameBorder", 0);
+            iframe.setAttribute("allowTransparency", !0);
+            return iframe;
+        }
+    };
+
+    return fn;
+});
+define('modules/widgets/poll_form',['modules/widgets/base'], function (base) {
+
+    return {};
+});
+define('modules/widgets/poll_votes',['modules/widgets/base'], function (base) {
     //Do setup work here
 
     return {}
 });
-define("modules/widgets/poll_form", function(){});
-
-define('poll_votes', [],function () {
+define('modules/widgets/tweetpoll_form',['modules/widgets/base'], function (base) {
     //Do setup work here
 
     return {}
 });
-define("modules/widgets/poll_votes", function(){});
-
-define('tweetpoll_form', [],function () {
+define('modules/widgets/tweetpoll_votes',['modules/widgets/base'], function (base) {
     //Do setup work here
 
     return {}
 });
-define("modules/widgets/tweetpoll_form", function(){});
+define('modules/widgets/hashtag',['modules/widgets/base'], function (base) {
 
-define('tweetpoll_votes', [],function () {
-    //Do setup work here
 
-    return {}
+    return {};
 });
-define("modules/widgets/tweetpoll_votes", function(){});
-
-define('hashtag', [],function () {
-    //Do setup work here
-
-    return {}
-});
-define("modules/widgets/hashtag", function(){});
-
 define('services', [],function () {
     var domain = "http://localhost:8080/encuestame",
         poll_form = "/api/jsonp/poll/embedded",
@@ -1854,6 +1934,8 @@ if (!window.__enme_widget) {
     (function(window, document) {
 
         window.__enme_widget = window.__enme_widget || {};
+
+        window.__enme_widget = window.__enme_widget || {}, __enme_widget.host = __enme_widget.host || "platform.twitter.com";
 
         // var domain = "http://localhost:8080/encuestame",
         // poll_form = "/api/jsonp/poll/embedded",
@@ -1894,7 +1976,10 @@ if (!window.__enme_widget) {
           services,
           jsonp) {
 
-          console.log("prddoo", poll_form);
+          // on dom is ready
+          domReady(function () {
+
+          });
 
       });
 
