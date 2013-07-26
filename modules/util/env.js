@@ -1,4 +1,4 @@
-define('env', function () {
+define(function () {
 
     "use strict";
 

@@ -1,5 +1,9 @@
 define(['modules/widgets/base'], function (base) {
 
 
-    return {};
+	var fn = {
+
+	};
+
+	return fn;
 });

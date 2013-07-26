@@ -5,8 +5,6 @@
 
 // });
 
-'use strict';
-
 if (!window.__enme_widget) {
     (function(window, document) {
 
@@ -32,29 +30,34 @@ if (!window.__enme_widget) {
         // script.src = domain + poll_form + '?id=1&callback=__enme_widget.d'
         // document.getElementsByTagName('head')[0].appendChild(script);
 
+
       require([
         "components/requirejs-domready/domReady",
-        "components/underscore/underscore",
-        "modules/widgets/poll_form",
-        "modules/widgets/poll_votes",
-        "modules/widgets/tweetpoll_form",
-        "modules/widgets/tweetpoll_votes",
-        "modules/widgets/hashtag",
-        "modules/util/services",
-        "modules/util/jsonp"
+        'modules/widgets/base',
+        'modules/widgets/render',
+        'components/underscore-amd/underscore'
         ], function(
           domReady,
-          _,
-          poll_form,
-          poll_votes,
-          tweetpoll_form,
-          tweetpoll_votes,
-          hashtag,
-          services,
-          jsonp) {
+          base,
+          render) {
+
+          'use strict';
+
+          //
+          var widgets_selectors = {
+              'a.enme-poll-form' : base.createPollForm,
+              'a.enme-poll-vote' : base.createPollVote,
+              'a.enme-tp-form' : base.createTpForm,
+              'a.enme-tp-vote' : base.createTpVote,
+              'a.enme-profile' : base.createProfile,
+              'a.enme-hashtag'  : base.createHashtag
+          };
 
           // on dom is ready
           domReady(function () {
+            render.findWidgets(widgets_selectors, function(){
+
+            });
 
           });
 

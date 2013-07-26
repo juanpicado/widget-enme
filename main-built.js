@@ -537,6 +537,288 @@ define('components/requirejs-domready/domReady',[],function () {
     return domReady;
 });
 
+define('modules/widgets/form',['modules/widgets/form'], function (base) {
+
+   var fn = {
+
+   };
+
+   return fn;
+});
+define('modules/widgets/poll_form',[
+	'modules/widgets/base',
+	'modules/widgets/form' ], function (base, form) {
+
+    return {};
+});
+define('modules/widgets/votes',['modules/widgets/votes'], function (base) {
+
+	var fn = {
+
+	};
+
+    return fn;
+});
+define('modules/widgets/poll_votes',[
+	'modules/widgets/base',
+	'modules/widgets/votes'], function (base, votes) {
+
+    //Do setup work here
+
+    return {}
+});
+define('modules/widgets/tweetpoll_form',[
+	'modules/widgets/base',
+	'modules/widgets/form' ], function (base, form) {
+
+    //Do setup work here
+
+   var fn = {
+
+   };
+
+   return fn;
+});
+define('modules/widgets/tweetpoll_votes',[
+	'modules/widgets/base',
+	'modules/widgets/votes' ], function (base, votes) {
+
+    //Do setup work here
+
+    return {}
+});
+define('modules/widgets/hashtag',['modules/widgets/base'], function (base) {
+
+
+	var fn = {
+
+	};
+
+	return fn;
+});
+define('services', [],function () {
+    var domain = "http://localhost:8080/encuestame",
+        poll_form = "/api/jsonp/poll/embedded",
+        tp_poll_form = "/api/jsonp/tweetpoll/embedded",
+        hashtag_profile = "/api/jsonp/hashtag/embedded",
+        user_profile = "/api/jsonp/profile/embedded",
+        poll_results = "/api/jsonp/poll/embedded",
+        tp_poll_results = "/api/jsonp/poll/embedded",
+        tp_poll_results = "/api/jsonp/poll/embedded";
+    return domain;
+});
+define("modules/util/services", function(){});
+
+define('jsonp', [],function () {
+    //Do setup work here
+
+    return {}
+});
+define("modules/util/jsonp", function(){});
+
+define('modules/util/env',[],function () {
+
+    
+
+    var fn = {
+
+        retina: function() {
+            return (window.devicePixelRatio || Math.round(window.screen.availWidth / document.documentElement.clientWidth)) > 1
+        },
+
+        anyIE: function() {
+            return /MSIE \d/.test(f);
+        },
+
+        ie6: function () {
+            return /MSIE 6/.test(f)
+        },
+
+        ie7: function() {
+            return /MSIE 7/.test(f)
+        },
+
+        touch: function() {
+            return "ontouchstart" in window || /Opera Mini/.test(f) || navigator.msMaxTouchPoints > 0
+        },
+
+        cssTransitions: function(){
+            var a = document.body.style;
+            return a.transition !== undefined || a.webkitTransition !== undefined || a.mozTransition !== undefined || a.oTransition !== undefined || a.msTransition !== undefined;
+        }
+
+    };
+
+    return fn;
+});
+define('modules/util/iframe',['modules/util/env'], function (env) {
+
+    
+
+    var fn = {
+
+        /**
+         * Create the iframe body
+         * @method
+         */
+        createIframeBody: function(widget) {
+            var iframe;
+                try {
+                    iframe = document.createElement('<iframe name="' + widget.name + '"></iframe>');
+                } catch (f) {
+                    iframe = document.createElement("iframe");
+                }
+            iframe.scrolling = "no";
+            iframe.allowtransparency = "true";
+            iframe.setAttribute("frameBorder", 0);
+            iframe.setAttribute("allowTransparency", !0);
+            return iframe;
+        }
+    };
+
+    return fn;
+});
+define('modules/widgets/base',[
+    "modules/widgets/poll_form",
+    "modules/widgets/poll_votes",
+    "modules/widgets/tweetpoll_form",
+    "modules/widgets/tweetpoll_votes",
+    "modules/widgets/hashtag",
+    "modules/util/services",
+    "modules/util/jsonp",
+    'modules/util/iframe',
+    'modules/util/env'], function (
+        poll_form,
+        poll_votes,
+        tweetpoll_form,
+        tweetpoll_votes,
+        hashtag,
+        services,
+        jsonp,
+        iframe,
+        env) {
+
+    
+
+    var fn = {
+
+        /**
+         *
+         * @method
+         */
+        createPollForm: function(widget) {
+            var form = new poll_form({
+                url: services.poll_form
+            });
+        },
+
+        /**
+         *
+         * @method
+         */
+        createPollVote: function(widget) {
+
+        },
+
+        /**
+         *
+         * @method
+         */
+        createTpForm: function(widget) {
+
+        },
+
+        /**
+         *
+         * @method
+         */
+        createTpVote: function(widget) {
+
+        },
+
+        /**
+         *
+         * @method
+         */
+        createProfile: function(widget) {
+
+        },
+
+        /**
+         *
+         * @method
+         */
+        createHashtag: function(widget) {
+
+        }
+    };
+
+    return fn;
+});
+define('modules/util/dom-utils',["modules/util/env"], function (enviroment) {
+
+    
+
+    var fn = {
+
+        /**
+         *
+         * @method
+         */
+        querySelectorAll: function(selectors) {
+            // http://caniuse.com/queryselector
+            if (enviroment.ie7() || enviroment.ie6()) {
+                //todo
+            } else {
+              return document.querySelectorAll(selectors);
+            }
+        },
+
+        /**
+         *
+         * @method
+         */
+        querySelector: function(selectors) {
+            // http://caniuse.com/queryselector
+            if (enviroment.ie7() || enviroment.ie6()) {
+                //todo
+            } else {
+              return document.querySelector(selectors);
+            }
+        }
+    };
+
+    return fn;
+});
+define('modules/widgets/render',["modules/util/dom-utils"], function(domUtils) {
+
+   
+
+   var fn = {
+
+        /**
+         *
+         * @method
+         */
+        findWidgets: function(widgets_list, exec) {
+            console.log("widgets_list", widgets_list);
+            _.each(widgets_list, function(index){
+                console.log("s", index, arguments);
+                domUtils.querySelectorAll();
+            });
+        },
+
+        /**
+         *
+         * @method
+         */
+        load: function(){
+
+        }
+   };
+
+   return fn;
+});
 //     Underscore.js 1.5.1
 //     http://underscorejs.org
 //     (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1782,144 +2064,17 @@ define('components/requirejs-domready/domReady',[],function () {
 
   });
 
+  // AMD define happens at the end for compatibility with AMD loaders
+  // that don't enforce next-turn semantics on modules.
+  if (typeof define === 'function' && define.amd) {
+    define('underscore', [],function() {
+      return _;
+    });
+  }
+
 }).call(this);
 
-define("components/underscore/underscore", function(){});
-
-define('env', [],function () {
-
-    
-
-    var fn = {
-
-        retina: function() {
-            return (window.devicePixelRatio || Math.round(window.screen.availWidth / document.documentElement.clientWidth)) > 1
-        },
-
-        anyIE: function() {
-            return /MSIE \d/.test(f);
-        },
-
-        ie6: function () {
-            return /MSIE 6/.test(f)
-        },
-
-        ie7: function() {
-            return /MSIE 7/.test(f)
-        },
-
-        touch: function() {
-            return "ontouchstart" in window || /Opera Mini/.test(f) || navigator.msMaxTouchPoints > 0
-        },
-
-        cssTransitions: function(){
-            var a = document.body.style;
-            return a.transition !== undefined || a.webkitTransition !== undefined || a.mozTransition !== undefined || a.oTransition !== undefined || a.msTransition !== undefined;
-        }
-
-    };
-
-    return fn;
-});
-define("modules/util/env", function(){});
-
-define('modules/util/iframe',['modules/util/env'], function (env) {
-
-    
-
-    var fn = {
-
-        /**
-         * Create the iframe body
-         * @method
-         */
-        createIframeBody: function(widget) {
-            var iframe;
-                try {
-                    iframe = document.createElement('<iframe name="' + widget.name + '"></iframe>');
-                } catch (f) {
-                    iframe = document.createElement("iframe");
-                }
-            iframe.scrolling = "no";
-            iframe.allowtransparency = "true";
-            iframe.setAttribute("frameBorder", 0);
-            iframe.setAttribute("allowTransparency", !0);
-            return iframe;
-        }
-    };
-
-    return fn;
-});
-define('modules/widgets/base',['modules/util/iframe', 'modules/util/env'], function (iframe, env) {
-
-    
-
-    var fn = {
-
-        /**
-         * Create the iframe body
-         * @method
-         */
-        createIframeBody: function(widget) {
-            var iframe;
-                try {
-                    iframe = document.createElement('<iframe name="' + widget.name + '"></iframe>');
-                } catch (f) {
-                    iframe = document.createElement("iframe");
-                }
-            iframe.scrolling = "no";
-            iframe.allowtransparency = "true";
-            iframe.setAttribute("frameBorder", 0);
-            iframe.setAttribute("allowTransparency", !0);
-            return iframe;
-        }
-    };
-
-    return fn;
-});
-define('modules/widgets/poll_form',['modules/widgets/base'], function (base) {
-
-    return {};
-});
-define('modules/widgets/poll_votes',['modules/widgets/base'], function (base) {
-    //Do setup work here
-
-    return {}
-});
-define('modules/widgets/tweetpoll_form',['modules/widgets/base'], function (base) {
-    //Do setup work here
-
-    return {}
-});
-define('modules/widgets/tweetpoll_votes',['modules/widgets/base'], function (base) {
-    //Do setup work here
-
-    return {}
-});
-define('modules/widgets/hashtag',['modules/widgets/base'], function (base) {
-
-
-    return {};
-});
-define('services', [],function () {
-    var domain = "http://localhost:8080/encuestame",
-        poll_form = "/api/jsonp/poll/embedded",
-        tp_poll_form = "/api/jsonp/tweetpoll/embedded",
-        hashtag_profile = "/api/jsonp/hashtag/embedded",
-        user_profile = "/api/jsonp/profile/embedded",
-        poll_results = "/api/jsonp/poll/embedded",
-        tp_poll_results = "/api/jsonp/poll/embedded",
-        tp_poll_results = "/api/jsonp/poll/embedded";
-    return domain;
-});
-define("modules/util/services", function(){});
-
-define('jsonp', [],function () {
-    //Do setup work here
-
-    return {}
-});
-define("modules/util/jsonp", function(){});
+define("components/underscore-amd/underscore", function(){});
 
 // require.config({
 
@@ -1927,8 +2082,6 @@ define("modules/util/jsonp", function(){});
 //   baseUrl: "./js",
 
 // });
-
-
 
 if (!window.__enme_widget) {
     (function(window, document) {
@@ -1955,29 +2108,34 @@ if (!window.__enme_widget) {
         // script.src = domain + poll_form + '?id=1&callback=__enme_widget.d'
         // document.getElementsByTagName('head')[0].appendChild(script);
 
+
       require([
         "components/requirejs-domready/domReady",
-        "components/underscore/underscore",
-        "modules/widgets/poll_form",
-        "modules/widgets/poll_votes",
-        "modules/widgets/tweetpoll_form",
-        "modules/widgets/tweetpoll_votes",
-        "modules/widgets/hashtag",
-        "modules/util/services",
-        "modules/util/jsonp"
+        'modules/widgets/base',
+        'modules/widgets/render',
+        'components/underscore-amd/underscore'
         ], function(
           domReady,
-          _,
-          poll_form,
-          poll_votes,
-          tweetpoll_form,
-          tweetpoll_votes,
-          hashtag,
-          services,
-          jsonp) {
+          base,
+          render) {
+
+          
+
+          //
+          var widgets_selectors = {
+              'a.enme-poll-form' : base.createPollForm,
+              'a.enme-poll-vote' : base.createPollVote,
+              'a.enme-tp-form' : base.createTpForm,
+              'a.enme-tp-vote' : base.createTpVote,
+              'a.enme-profile' : base.createProfile,
+              'a.enme-hashtag'  : base.createHashtag
+          };
 
           // on dom is ready
           domReady(function () {
+            render.findWidgets(widgets_selectors, function(){
+
+            });
 
           });
 
