@@ -5,8 +5,6 @@ define([
     "modules/widgets/tweetpoll_votes",
     "modules/widgets/hashtag",
     "modules/util/services",
-    "modules/util/jsonp",
-    'modules/util/iframe',
     'modules/util/env'], function (
         poll_form,
         poll_votes,
@@ -14,8 +12,6 @@ define([
         tweetpoll_votes,
         hashtag,
         services,
-        jsonp,
-        iframe,
         env) {
 
     "use strict";
@@ -27,8 +23,11 @@ define([
          * @method
          */
         createPollForm: function(widget) {
-            var form = new poll_form({
+            return poll_form.render({
+                widget: widget,
                 url: services.poll_form
+            }, function(){
+                console.log("on render", widget);
             });
         },
 

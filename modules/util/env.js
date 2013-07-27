@@ -2,6 +2,8 @@ define(function () {
 
     "use strict";
 
+    var f = window.navigator.userAgent;
+
     var fn = {
 
         retina: function() {

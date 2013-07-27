@@ -1,11 +1,13 @@
-define('services', function () {
-    var domain = "http://localhost:8080/encuestame",
-        poll_form = "/api/jsonp/poll/embedded",
-        tp_poll_form = "/api/jsonp/tweetpoll/embedded",
-        hashtag_profile = "/api/jsonp/hashtag/embedded",
-        user_profile = "/api/jsonp/profile/embedded",
-        poll_results = "/api/jsonp/poll/embedded",
-        tp_poll_results = "/api/jsonp/poll/embedded",
-        tp_poll_results = "/api/jsonp/poll/embedded";
-    return domain;
+define(function () {
+    var domain = __enme_widget.host;
+    var services = {
+        poll_form : domain + "/api/jsonp/poll/embedded",
+        tp_poll_form : domain + "/api/jsonp/tweetpoll/embedded",
+        hashtag_profile : domain + "/api/jsonp/hashtag/embedded",
+        user_profile : domain + "/api/jsonp/profile/embedded",
+        poll_results : domain + "/api/jsonp/poll/embedded",
+        tp_poll_results : domain + "/api/jsonp/poll/embedded",
+        tp_poll_results : domain + "/api/jsonp/poll/embedded"
+    };
+    return services;
 });

@@ -1,4 +1,4 @@
-define(['modules/widgets/form'], function (base) {
+define(function (form) {
 
    var fn = {
 

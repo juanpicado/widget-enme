@@ -10,7 +10,9 @@ if (!window.__enme_widget) {
 
         window.__enme_widget = window.__enme_widget || {};
 
-        window.__enme_widget = window.__enme_widget || {}, __enme_widget.host = __enme_widget.host || "platform.twitter.com";
+        window.__enme_widget = window.__enme_widget || {}, __enme_widget.host = __enme_widget.host || "http://localhost:8080/encuestame/";
+
+        window.__enme_widget.callbacks = {};
 
         // var domain = "http://localhost:8080/encuestame",
         // poll_form = "/api/jsonp/poll/embedded",
@@ -55,8 +57,10 @@ if (!window.__enme_widget) {
 
           // on dom is ready
           domReady(function () {
-            render.findWidgets(widgets_selectors, function(){
-
+            render.findWidgets(widgets_selectors, function(data){
+                _.each(data, function(a,b){
+                    a.module(a);
+                });
             });
 
           });

@@ -9,11 +9,19 @@ define(["modules/util/dom-utils"], function(domUtils) {
          * @method
          */
         findWidgets: function(widgets_list, exec) {
-            console.log("widgets_list", widgets_list);
-            _.each(widgets_list, function(index){
-                console.log("s", index, arguments);
-                domUtils.querySelectorAll();
+            var list_wi = [];
+            _.each(widgets_list, function(a,b,c) {
+                var list = domUtils.querySelectorAll(b);
+                for (var i = 0; i < list.length; i++) {
+                    var item_widget = list[i];
+                    list_wi.push({
+                        node: item_widget,
+                        properties: domUtils.widgetInfo(item_widget),
+                        module: a
+                    });
+                };
             });
+            exec(list_wi);
         },
 
         /**

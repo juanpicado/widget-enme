@@ -537,7 +537,7 @@ define('components/requirejs-domready/domReady',[],function () {
     return domReady;
 });
 
-define('modules/widgets/form',['modules/widgets/form'], function (base) {
+define('modules/widgets/form',['require'],function (form) {
 
    var fn = {
 
@@ -545,80 +545,40 @@ define('modules/widgets/form',['modules/widgets/form'], function (base) {
 
    return fn;
 });
-define('modules/widgets/poll_form',[
-	'modules/widgets/base',
-	'modules/widgets/form' ], function (base, form) {
-
-    return {};
+define('modules/util/services',[],function () {
+    var domain = __enme_widget.host;
+    var services = {
+        poll_form : domain + "/api/jsonp/poll/embedded",
+        tp_poll_form : domain + "/api/jsonp/tweetpoll/embedded",
+        hashtag_profile : domain + "/api/jsonp/hashtag/embedded",
+        user_profile : domain + "/api/jsonp/profile/embedded",
+        poll_results : domain + "/api/jsonp/poll/embedded",
+        tp_poll_results : domain + "/api/jsonp/poll/embedded",
+        tp_poll_results : domain + "/api/jsonp/poll/embedded"
+    };
+    return services;
 });
-define('modules/widgets/votes',['modules/widgets/votes'], function (base) {
-
-	var fn = {
-
-	};
-
-    return fn;
-});
-define('modules/widgets/poll_votes',[
-	'modules/widgets/base',
-	'modules/widgets/votes'], function (base, votes) {
-
+define('modules/util/jsonp',[],function () {
     //Do setup work here
 
-    return {}
+    var body = {
+        get: function(url, module, id, instance) {
+
+            var script = document.createElement('script');
+            var name = "__enme_widget.callbacks._" + module +"_" + id;
+            script.src = url + '?id=' + id + '&callback=' + name;
+            console.log("URL", script.src);
+            document.getElementsByTagName('head')[0].appendChild(script);
+        }
+    };
+
+    return body;
 });
-define('modules/widgets/tweetpoll_form',[
-	'modules/widgets/base',
-	'modules/widgets/form' ], function (base, form) {
-
-    //Do setup work here
-
-   var fn = {
-
-   };
-
-   return fn;
-});
-define('modules/widgets/tweetpoll_votes',[
-	'modules/widgets/base',
-	'modules/widgets/votes' ], function (base, votes) {
-
-    //Do setup work here
-
-    return {}
-});
-define('modules/widgets/hashtag',['modules/widgets/base'], function (base) {
-
-
-	var fn = {
-
-	};
-
-	return fn;
-});
-define('services', [],function () {
-    var domain = "http://localhost:8080/encuestame",
-        poll_form = "/api/jsonp/poll/embedded",
-        tp_poll_form = "/api/jsonp/tweetpoll/embedded",
-        hashtag_profile = "/api/jsonp/hashtag/embedded",
-        user_profile = "/api/jsonp/profile/embedded",
-        poll_results = "/api/jsonp/poll/embedded",
-        tp_poll_results = "/api/jsonp/poll/embedded",
-        tp_poll_results = "/api/jsonp/poll/embedded";
-    return domain;
-});
-define("modules/util/services", function(){});
-
-define('jsonp', [],function () {
-    //Do setup work here
-
-    return {}
-});
-define("modules/util/jsonp", function(){});
-
 define('modules/util/env',[],function () {
 
     
+
+    var f = window.navigator.userAgent;
 
     var fn = {
 
@@ -662,9 +622,10 @@ define('modules/util/iframe',['modules/util/env'], function (env) {
          * @method
          */
         createIframeBody: function(widget) {
-            var iframe;
+            var iframe,
+            name = "enme-widget-";
                 try {
-                    iframe = document.createElement('<iframe name="' + widget.name + '"></iframe>');
+                    iframe = document.createElement('<iframe name="' + name + widget.properties.id + '"></iframe>');
                 } catch (f) {
                     iframe = document.createElement("iframe");
                 }
@@ -678,6 +639,100 @@ define('modules/util/iframe',['modules/util/env'], function (env) {
 
     return fn;
 });
+define('modules/widgets/widget_base',[
+    "modules/util/services",
+    "modules/util/jsonp",
+    'modules/util/iframe'
+    ],function (
+        services,
+        jsonp,
+        iframe) {
+    var p = iframe,
+    b = jsonp,
+    css = "",
+    s = services,
+    fn =  {
+        getDocument: function(widget) {
+            var _iframe = p.createIframeBody(widget);
+        },
+
+        getCss: function() {
+
+        },
+
+        getBody: function(widget, module) {
+            b.get(widget.url, module, widget.widget.properties.id, null);
+        }
+    };
+
+    return fn;
+});
+define('modules/widgets/poll_form',[
+    'modules/widgets/form',
+    'modules/widgets/widget_base'
+    ], function (form, base) {
+
+     var module = "form_poll";
+     var poll_form = {
+        render: function(widget, onRender) {
+            var documentIframe = base.getDocument(widget);
+            //__enme_widget.callbacks[]
+            __enme_widget.callbacks["_" + module +"_" + widget.widget.properties.id] = function(data){
+                widget.body = data;
+                console.log("dsadsa", widget);
+                onRender(widget);
+            };
+            base.getBody(widget, module);
+        }
+     };
+
+    return poll_form;
+});
+define('modules/widgets/votes',['modules/widgets/votes'], function (base) {
+
+	var fn = {
+
+	};
+
+    return fn;
+});
+define('modules/widgets/poll_votes',[
+	'modules/widgets/widget_base',
+	'modules/widgets/votes'], function (base, votes) {
+
+    //Do setup work here
+
+    return {}
+});
+define('modules/widgets/tweetpoll_form',[
+	'modules/widgets/base',
+	'modules/widgets/form' ], function (base, form) {
+
+    //Do setup work here
+
+   var fn = {
+
+   };
+
+   return fn;
+});
+define('modules/widgets/tweetpoll_votes',[
+	'modules/widgets/base',
+	'modules/widgets/votes' ], function (base, votes) {
+
+    //Do setup work here
+
+    return {}
+});
+define('modules/widgets/hashtag',['modules/widgets/base'], function (base) {
+
+
+	var fn = {
+
+	};
+
+	return fn;
+});
 define('modules/widgets/base',[
     "modules/widgets/poll_form",
     "modules/widgets/poll_votes",
@@ -685,8 +740,6 @@ define('modules/widgets/base',[
     "modules/widgets/tweetpoll_votes",
     "modules/widgets/hashtag",
     "modules/util/services",
-    "modules/util/jsonp",
-    'modules/util/iframe',
     'modules/util/env'], function (
         poll_form,
         poll_votes,
@@ -694,8 +747,6 @@ define('modules/widgets/base',[
         tweetpoll_votes,
         hashtag,
         services,
-        jsonp,
-        iframe,
         env) {
 
     
@@ -707,8 +758,11 @@ define('modules/widgets/base',[
          * @method
          */
         createPollForm: function(widget) {
-            var form = new poll_form({
+            return poll_form.render({
+                widget: widget,
                 url: services.poll_form
+            }, function(){
+                console.log("on render", widget);
             });
         },
 
@@ -759,6 +813,8 @@ define('modules/util/dom-utils',["modules/util/env"], function (enviroment) {
 
     
 
+    var prefix = "data-";
+
     var fn = {
 
         /**
@@ -785,6 +841,18 @@ define('modules/util/dom-utils',["modules/util/env"], function (enviroment) {
             } else {
               return document.querySelector(selectors);
             }
+        },
+
+        /**
+         *
+         * @method
+         */
+        widgetInfo: function(widget) {
+            var o = {
+                id: widget.getAttribute(prefix + 'id'),
+                url: widget.getAttribute(prefix + 'url')
+            };
+            return o;
         }
     };
 
@@ -801,11 +869,19 @@ define('modules/widgets/render',["modules/util/dom-utils"], function(domUtils) {
          * @method
          */
         findWidgets: function(widgets_list, exec) {
-            console.log("widgets_list", widgets_list);
-            _.each(widgets_list, function(index){
-                console.log("s", index, arguments);
-                domUtils.querySelectorAll();
+            var list_wi = [];
+            _.each(widgets_list, function(a,b,c) {
+                var list = domUtils.querySelectorAll(b);
+                for (var i = 0; i < list.length; i++) {
+                    var item_widget = list[i];
+                    list_wi.push({
+                        node: item_widget,
+                        properties: domUtils.widgetInfo(item_widget),
+                        module: a
+                    });
+                };
             });
+            exec(list_wi);
         },
 
         /**
@@ -2088,7 +2164,9 @@ if (!window.__enme_widget) {
 
         window.__enme_widget = window.__enme_widget || {};
 
-        window.__enme_widget = window.__enme_widget || {}, __enme_widget.host = __enme_widget.host || "platform.twitter.com";
+        window.__enme_widget = window.__enme_widget || {}, __enme_widget.host = __enme_widget.host || "http://localhost:8080/encuestame/";
+
+        window.__enme_widget.callbacks = {};
 
         // var domain = "http://localhost:8080/encuestame",
         // poll_form = "/api/jsonp/poll/embedded",
@@ -2133,8 +2211,10 @@ if (!window.__enme_widget) {
 
           // on dom is ready
           domReady(function () {
-            render.findWidgets(widgets_selectors, function(){
-
+            render.findWidgets(widgets_selectors, function(data){
+                _.each(data, function(a,b){
+                    a.module(a);
+                });
             });
 
           });

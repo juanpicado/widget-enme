@@ -9,9 +9,10 @@ define(['modules/util/env'], function (env) {
          * @method
          */
         createIframeBody: function(widget) {
-            var iframe;
+            var iframe,
+            name = "enme-widget-";
                 try {
-                    iframe = document.createElement('<iframe name="' + widget.name + '"></iframe>');
+                    iframe = document.createElement('<iframe name="' + name + widget.properties.id + '"></iframe>');
                 } catch (f) {
                     iframe = document.createElement("iframe");
                 }

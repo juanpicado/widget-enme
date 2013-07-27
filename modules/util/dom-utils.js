@@ -2,6 +2,8 @@ define(["modules/util/env"], function (enviroment) {
 
     "use strict";
 
+    var prefix = "data-";
+
     var fn = {
 
         /**
@@ -28,6 +30,18 @@ define(["modules/util/env"], function (enviroment) {
             } else {
               return document.querySelector(selectors);
             }
+        },
+
+        /**
+         *
+         * @method
+         */
+        widgetInfo: function(widget) {
+            var o = {
+                id: widget.getAttribute(prefix + 'id'),
+                url: widget.getAttribute(prefix + 'url')
+            };
+            return o;
         }
     };
 
