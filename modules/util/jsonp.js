@@ -3,11 +3,9 @@ define(function () {
 
     var body = {
         get: function(url, module, id, instance) {
-
             var script = document.createElement('script');
             var name = "__enme_widget.callbacks._" + module +"_" + id;
             script.src = url + '?id=' + id + '&callback=' + name;
-            console.log("URL", script.src);
             document.getElementsByTagName('head')[0].appendChild(script);
         }
     };

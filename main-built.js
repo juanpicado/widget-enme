@@ -540,7 +540,17 @@ define('components/requirejs-domready/domReady',[],function () {
 define('modules/widgets/form',['require'],function (form) {
 
    var fn = {
-
+        box_dimensions: {
+              DEFAULT_HEIGHT: "600",
+              DEFAULT_WIDTH: "520",
+              NARROW_WIDTH: "320",
+              MIN_WIDTH: "180",
+              MIN_HEIGHT: "200",
+              WIDE_MEDIA_PADDING: 81,
+              NARROW_MEDIA_PADDING: 16,
+              WIDE_MEDIA_PADDING_CL: 60,
+              NARROW_MEDIA_PADDING_CL: 12
+      }
    };
 
    return fn;
@@ -563,11 +573,9 @@ define('modules/util/jsonp',[],function () {
 
     var body = {
         get: function(url, module, id, instance) {
-
             var script = document.createElement('script');
             var name = "__enme_widget.callbacks._" + module +"_" + id;
             script.src = url + '?id=' + id + '&callback=' + name;
-            console.log("URL", script.src);
             document.getElementsByTagName('head')[0].appendChild(script);
         }
     };
@@ -654,6 +662,7 @@ define('modules/widgets/widget_base',[
     fn =  {
         getDocument: function(widget) {
             var _iframe = p.createIframeBody(widget);
+            return _iframe;
         },
 
         getCss: function() {
@@ -676,11 +685,16 @@ define('modules/widgets/poll_form',[
      var poll_form = {
         render: function(widget, onRender) {
             var documentIframe = base.getDocument(widget);
+            documentIframe.style.cssText = "",
+            documentIframe.width = form.box_dimensions.DEFAULT_WIDTH,
+            documentIframe.height = form.box_dimensions.DEFAULT_HEIGHT,
+            documentIframe.style.border = "none",
+            documentIframe.style.maxWidth = "100%",
+            documentIframe.style.minWidth = form.box_dimensions.MIN_WIDTH + "px";
             //__enme_widget.callbacks[]
-            __enme_widget.callbacks["_" + module +"_" + widget.widget.properties.id] = function(data){
+            __enme_widget.callbacks["_" + module +"_" + widget.widget.properties.id] = function(data) {
                 widget.body = data;
-                console.log("dsadsa", widget);
-                onRender(widget);
+                onRender(widget, documentIframe);
             };
             base.getBody(widget, module);
         }
@@ -761,8 +775,12 @@ define('modules/widgets/base',[
             return poll_form.render({
                 widget: widget,
                 url: services.poll_form
-            }, function(){
-                console.log("on render", widget);
+            }, function(widget, iframe) {
+                var node = widget.widget.node;
+                document.body.appendChild(iframe);
+                document.body.replaceChild(iframe, node);
+                var _i_document = iframe.contentDocument;
+                _i_document.body.innerHTML = widget.body.body;
             });
         },
 

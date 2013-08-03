@@ -13,6 +13,7 @@ define([
     fn =  {
         getDocument: function(widget) {
             var _iframe = p.createIframeBody(widget);
+            return _iframe;
         },
 
         getCss: function() {

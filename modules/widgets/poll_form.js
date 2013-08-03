@@ -7,11 +7,16 @@ define([
      var poll_form = {
         render: function(widget, onRender) {
             var documentIframe = base.getDocument(widget);
+            documentIframe.style.cssText = "",
+            documentIframe.width = form.box_dimensions.DEFAULT_WIDTH,
+            documentIframe.height = form.box_dimensions.DEFAULT_HEIGHT,
+            documentIframe.style.border = "none",
+            documentIframe.style.maxWidth = "100%",
+            documentIframe.style.minWidth = form.box_dimensions.MIN_WIDTH + "px";
             //__enme_widget.callbacks[]
-            __enme_widget.callbacks["_" + module +"_" + widget.widget.properties.id] = function(data){
+            __enme_widget.callbacks["_" + module +"_" + widget.widget.properties.id] = function(data) {
                 widget.body = data;
-                console.log("dsadsa", widget);
-                onRender(widget);
+                onRender(widget, documentIframe);
             };
             base.getBody(widget, module);
         }

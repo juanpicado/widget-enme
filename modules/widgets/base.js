@@ -26,8 +26,12 @@ define([
             return poll_form.render({
                 widget: widget,
                 url: services.poll_form
-            }, function(){
-                console.log("on render", widget);
+            }, function(widget, iframe) {
+                var node = widget.widget.node;
+                document.body.appendChild(iframe);
+                document.body.replaceChild(iframe, node);
+                var _i_document = iframe.contentDocument;
+                _i_document.body.innerHTML = widget.body.body;
             });
         },
 
