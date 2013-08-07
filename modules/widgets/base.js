@@ -20,18 +20,19 @@ define([
 
         /**
          *
-         * @method
+         * @method createPollForm
          */
         createPollForm: function(widget) {
             return poll_form.render({
                 widget: widget,
                 url: services.poll_form
-            }, function(widget, iframe) {
+            }, function(widget, iframe, css) {
                 var node = widget.widget.node;
                 document.body.appendChild(iframe);
                 document.body.replaceChild(iframe, node);
                 var _i_document = iframe.contentDocument;
                 _i_document.body.innerHTML = widget.body.body;
+                _i_document.head.appendChild(css);
             });
         },
 

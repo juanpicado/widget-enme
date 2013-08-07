@@ -538,7 +538,7 @@ define('components/requirejs-domready/domReady',[],function () {
 });
 
 define('modules/widgets/form',['require'],function (form) {
-
+   var domain = __enme_widget.host;
    var fn = {
         box_dimensions: {
               DEFAULT_HEIGHT: "600",
@@ -550,7 +550,8 @@ define('modules/widgets/form',['require'],function (form) {
               NARROW_MEDIA_PADDING: 16,
               WIDE_MEDIA_PADDING_CL: 60,
               NARROW_MEDIA_PADDING_CL: 12
-      }
+      },
+      cssStyle: domain + "resources/css/form.css"
    };
 
    return fn;
@@ -660,15 +661,32 @@ define('modules/widgets/widget_base',[
     css = "",
     s = services,
     fn =  {
+
+        /**
+         *
+         * @method
+         */
         getDocument: function(widget) {
             var _iframe = p.createIframeBody(widget);
             return _iframe;
         },
 
-        getCss: function() {
-
+        /**
+         *
+         * @method
+         */
+        getCss: function(url) {
+            var css = document.createElement("link");
+            css.rel = "stylesheet";
+            css.type = "text/css";
+            css.href = url;
+            return css;
         },
 
+        /**
+         *
+         * @method
+         */
         getBody: function(widget, module) {
             b.get(widget.url, module, widget.widget.properties.id, null);
         }
@@ -685,6 +703,7 @@ define('modules/widgets/poll_form',[
      var poll_form = {
         render: function(widget, onRender) {
             var documentIframe = base.getDocument(widget);
+            var cssNode = base.getCss(form.cssStyle);
             documentIframe.style.cssText = "",
             documentIframe.width = form.box_dimensions.DEFAULT_WIDTH,
             documentIframe.height = form.box_dimensions.DEFAULT_HEIGHT,
@@ -694,7 +713,7 @@ define('modules/widgets/poll_form',[
             //__enme_widget.callbacks[]
             __enme_widget.callbacks["_" + module +"_" + widget.widget.properties.id] = function(data) {
                 widget.body = data;
-                onRender(widget, documentIframe);
+                onRender(widget, documentIframe, cssNode);
             };
             base.getBody(widget, module);
         }
@@ -769,18 +788,19 @@ define('modules/widgets/base',[
 
         /**
          *
-         * @method
+         * @method createPollForm
          */
         createPollForm: function(widget) {
             return poll_form.render({
                 widget: widget,
                 url: services.poll_form
-            }, function(widget, iframe) {
+            }, function(widget, iframe, css) {
                 var node = widget.widget.node;
                 document.body.appendChild(iframe);
                 document.body.replaceChild(iframe, node);
                 var _i_document = iframe.contentDocument;
                 _i_document.body.innerHTML = widget.body.body;
+                _i_document.head.appendChild(css);
             });
         },
 
