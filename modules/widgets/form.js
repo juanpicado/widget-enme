@@ -12,7 +12,7 @@ define(function (form) {
               WIDE_MEDIA_PADDING_CL: 60,
               NARROW_MEDIA_PADDING_CL: 12
       },
-      cssStyle: domain + "resources/css/form.css"
+      cssStyle: domain + "resources/css/dev/embebed/form.css"
    };
 
    return fn;

@@ -551,7 +551,7 @@ define('modules/widgets/form',['require'],function (form) {
               WIDE_MEDIA_PADDING_CL: 60,
               NARROW_MEDIA_PADDING_CL: 12
       },
-      cssStyle: domain + "resources/css/form.css"
+      cssStyle: domain + "resources/dev/embebed/form.css"
    };
 
    return fn;
@@ -559,13 +559,13 @@ define('modules/widgets/form',['require'],function (form) {
 define('modules/util/services',[],function () {
     var domain = __enme_widget.host;
     var services = {
-        poll_form : domain + "/api/jsonp/poll/embedded",
-        tp_poll_form : domain + "/api/jsonp/tweetpoll/embedded",
-        hashtag_profile : domain + "/api/jsonp/hashtag/embedded",
-        user_profile : domain + "/api/jsonp/profile/embedded",
-        poll_results : domain + "/api/jsonp/poll/embedded",
-        tp_poll_results : domain + "/api/jsonp/poll/embedded",
-        tp_poll_results : domain + "/api/jsonp/poll/embedded"
+        poll_form : domain + "api/jsonp/poll/embedded",
+        tp_poll_form : domain + "api/jsonp/tweetpoll/embedded",
+        hashtag_profile : domain + "api/jsonp/hashtag/embedded",
+        user_profile : domain + "api/jsonp/profile/embedded",
+        poll_results : domain + "api/jsonp/poll/embedded",
+        tp_poll_results : domain + "api/jsonp/poll/embedded",
+        tp_poll_results : domain + "api/jsonp/poll/embedded"
     };
     return services;
 });
