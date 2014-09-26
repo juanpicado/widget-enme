@@ -1,5 +1,12 @@
-define(['modules/widgets/widget_base'], function (base) {
-    //Do setup work here
+"use strict";
 
-    return {}
-});
+var form = require('./form'),
+    base = require('./base');
+var fn = {
+
+};
+
+return fn;
+
+
+module.exports = fn;

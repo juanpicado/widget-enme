@@ -1,8 +1,12 @@
-define([
-	'modules/widgets/base',
-	'modules/widgets/votes' ], function (base, votes) {
+"use strict";
 
-    //Do setup work here
+var form = require('./form'),
+    base = require('./base');
+var fn = {
 
-    return {}
-});
+};
+
+return fn;
+
+
+module.exports = fn;

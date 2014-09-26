@@ -1,8 +1,12 @@
-define(['modules/widgets/votes'], function (base) {
+"use strict";
 
-	var fn = {
+var form = require('./form'),
+    base = require('./base');
+var fn = {
 
-	};
+};
 
-    return fn;
-});
+return fn;
+
+
+module.exports = fn;
