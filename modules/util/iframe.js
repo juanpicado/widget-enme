@@ -1,7 +1,5 @@
-define(['modules/util/env'], function (env) {
-
     "use strict";
-
+    var env = require('./env');
     var fn = {
 
         /**
@@ -24,5 +22,4 @@ define(['modules/util/env'], function (env) {
         }
     };
 
-    return fn;
-});
+module.exports = fn;

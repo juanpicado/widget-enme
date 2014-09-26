@@ -1,23 +1,17 @@
-define([
-    "modules/util/services",
-    "modules/util/jsonp",
-    'modules/util/iframe'
-    ],function (
-        services,
-        jsonp,
-        iframe) {
-    var p = iframe,
-    b = jsonp,
+"use strict";
+
+    var iframe = require('../util/iframe'),
+    jsonp = require('../util/jsonp'),
     css = "",
-    s = services,
-    fn =  {
+    services = require('../util/services');
+    var fn =  {
 
         /**
          *
          * @method
          */
         getDocument: function(widget) {
-            var _iframe = p.createIframeBody(widget);
+            var _iframe = iframe.createIframeBody(widget);
             return _iframe;
         },
 
@@ -38,9 +32,10 @@ define([
          * @method
          */
         getBody: function(widget, module) {
-            b.get(widget.url, module, widget.widget.properties.id, null);
+            jsonp.get(widget.url, module, widget.widget.properties.id, null);
         }
     };
 
-    return fn;
-});
+module.exports = fn;
+
+

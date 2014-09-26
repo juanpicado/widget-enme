@@ -1,5 +1,4 @@
-define(function () {
-    //Do setup work here
+"use strict";
 
     var body = {
         get: function(url, module, id, instance) {
@@ -10,5 +9,4 @@ define(function () {
         }
     };
 
-    return body;
-});
+module.exports = body;

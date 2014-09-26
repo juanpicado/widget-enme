@@ -1,12 +1,8 @@
 "use strict";
 
 var form = require('./form'),
-    base = require('./base');
+    base = require('./widget_base');
 var fn = {
 
 };
-
-return fn;
-
-
 module.exports = fn;

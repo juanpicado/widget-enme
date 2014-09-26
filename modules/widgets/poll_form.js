@@ -1,7 +1,7 @@
 "use strict";
 
  var form = require('./form'),
-     base = require('./base');
+     base = require('./widget_base');
 console.log("------->", base);
  var _module = "form_poll";
  var poll_form = {

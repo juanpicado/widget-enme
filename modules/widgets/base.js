@@ -5,8 +5,7 @@ var poll_form = require('./poll_form'),
     tweetpoll_form = require('./tweetpoll_form'),
     tweetpoll_votes = require('./tweetpoll_votes'),
     hashtag = require('./hashtag'),
-    services = require('../util/services'),
-    env = require('../util/env');
+    services = require('../util/services');
 
 
 var fn = {
