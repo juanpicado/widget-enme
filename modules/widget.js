@@ -58,7 +58,7 @@ if (!global.__enme_widget) {
             util.listen("load", window, function() {
                 render.findWidgets(widgets_selectors, function(data) {
                     _.each(data, function(a,b){
-                        a.module(a);
+                        a._module(a);
                     });
                 });
             });

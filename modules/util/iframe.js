@@ -1,5 +1,4 @@
     "use strict";
-    var env = require('./env');
     var fn = {
 
         /**

@@ -790,7 +790,7 @@ define('modules/widgets/base',[
          *
          * @method createPollForm
          */
-        createPollForm: function(widget) {
+            createPollForm: function(widget) {
             return poll_form.render({
                 widget: widget,
                 url: services.poll_form

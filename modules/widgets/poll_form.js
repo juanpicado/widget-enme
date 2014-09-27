@@ -2,7 +2,6 @@
 
  var form = require('./form'),
      base = require('./widget_base');
-console.log("------->", base);
  var _module = "form_poll";
  var poll_form = {
     render: function(widget, onRender) {
@@ -19,7 +18,7 @@ console.log("------->", base);
             widget.body = data;
             onRender(widget, documentIframe, cssNode);
         };
-        base.getBody(widget, module);
+        base.getBody(widget, _module);
     }
  };
 

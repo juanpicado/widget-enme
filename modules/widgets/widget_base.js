@@ -31,8 +31,8 @@
          *
          * @method
          */
-        getBody: function(widget, module) {
-            jsonp.get(widget.url, module, widget.widget.properties.id, null);
+        getBody: function(widget, _module) {
+            jsonp.get(widget.url, _module, widget.widget.properties.id, null);
         }
     };
 

@@ -18,7 +18,7 @@ var fn = {
                 list_wi.push({
                     node: item_widget,
                     properties: domUtils.widgetInfo(item_widget),
-                    module: a
+                    _module: a
                 });
             }
         });
