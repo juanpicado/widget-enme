@@ -6,7 +6,7 @@ notifications:
     on_failure : "change"
 
 install:
-  - npm install -g grunt-cli
+  - npm install -g gulp
   - npm install
 script:
-   - grunt
+   - gulp

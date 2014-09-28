@@ -25,22 +25,6 @@ if (!global.__enme_widget) {
         _widget.callbacks = {};
         global.__enme_widget = _widget;
 
-//        require([
-//            "components/requirejs-domready/domReady",
-//            'modules/widgets/base',
-//            'modules/widgets/render',
-//            'components/underscore-amd/underscore'
-//        ], function(
-//            domReady,
-//            base,
-//            render) {
-//
-//            'use strict';
-//
-//            //
-//
-//        });
-
             var base = require('./widgets/base'),
             util = require('./util/dom-utils'),
             render = require('./widgets/render'),
