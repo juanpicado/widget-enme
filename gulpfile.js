@@ -18,6 +18,7 @@ var jshint = require('gulp-jshint');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
+var mochaPhantomJS = require('gulp-mocha-phantomjs');
 var browserify = require('gulp-browatchify');
 var watchify = require('watchify');
 var del = require('del');
@@ -26,14 +27,28 @@ gulp.task('default', ['clean'], function() {
     gulp.start('lint', 'browserify');
 });
 
+gulp.task('dev', ['clean'], function() {
+    gulp.start('lint', 'browserify');
+});
+
 gulp.task('clean', function(cb) {
     del(['dist/*'], cb)
+});
+
+gulp.task('build', ['clean'], function() {
+    gulp.start('lint', 'test', 'browserify');
 });
 
 gulp.task('lint', function() {
     return gulp.src('./modules/widgets/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
+});
+
+gulp.task('test', function () {
+    return gulp
+        .src('tests/runner.html')
+        .pipe(mochaPhantomJS());
 });
 
 gulp.task('browserify', function () {

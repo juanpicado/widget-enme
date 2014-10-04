@@ -17,6 +17,7 @@
             iframe.allowtransparency = "true";
             iframe.setAttribute("frameBorder", 0);
             iframe.setAttribute("allowTransparency", !0);
+            iframe.style.width = window.innerWidth - 20 + "px";
             return iframe;
         }
     };

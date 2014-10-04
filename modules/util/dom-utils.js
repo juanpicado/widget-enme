@@ -29,14 +29,25 @@
 
     /**
      *
+     * @param options
+     */
+    createCanvas : function(doc, options) {
+        var canvas = doc.createElement("canvas");
+        canvas.width = doc.body.clientWidth - 20;
+        canvas.height = 200;
+        return canvas;
+    },
+
+    /**
+     *
      * @method
      */
-    querySelector: function(selectors) {
+    querySelector: function(selectors, doc) {
         // http://caniuse.com/queryselector
         if (enviroment.ie7() || enviroment.ie6()) {
             //todo
         } else {
-          return document.querySelector(selectors);
+          return doc ? doc.querySelector(selectors) : document.querySelector(selectors);
         }
     },
 

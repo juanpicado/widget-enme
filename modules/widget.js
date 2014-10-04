@@ -21,8 +21,9 @@ if (!global.__enme_widget) {
     (function(document) {
 
         var _widget = {};
-        _widget.host  = "http://localhost:8080/encuestame/";
         _widget.callbacks = {};
+
+        _widget.host  = "http://192.168.0.12:8080/encuestame/";
         global.__enme_widget = _widget;
 
             var base = require('./widgets/base'),
