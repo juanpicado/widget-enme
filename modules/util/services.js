@@ -1,3 +1,5 @@
+/*global __enme_widget:false*/
+
 "use strict";
 
 var domain = __enme_widget.host;

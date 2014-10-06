@@ -19,9 +19,9 @@
 
     // Cross-browser implementation of element.addEventListener()
     listen : function(evnt, elem, func) {
-        if (elem.addEventListener)  // W3C DOM
-            elem.addEventListener(evnt,func,false);
-        else if (elem.attachEvent) { // IE DOM
+        if (elem.addEventListener) { // W3C DOM
+            elem.addEventListener(evnt, func, false);
+        } else if (elem.attachEvent) { // IE DOM
             var r = elem.attachEvent("on"+evnt, func);
             return r;
         }
