@@ -1,6 +1,6 @@
     "use strict";
 
-    var enviroment = require('./env');
+    var env = require('./env');
     var prefix = "data-";
     var fn = {
 
@@ -10,7 +10,7 @@
      */
     querySelectorAll: function(selectors) {
         // http://caniuse.com/queryselector
-        if (enviroment.ie7() || enviroment.ie6()) {
+        if (env.ie7() || env.ie6()) {
             //todo
         } else {
           return document.querySelectorAll(selectors);
@@ -44,7 +44,7 @@
      */
     querySelector: function(selectors, doc) {
         // http://caniuse.com/queryselector
-        if (enviroment.ie7() || enviroment.ie6()) {
+        if (env.ie7() || env.ie6()) {
             //todo
         } else {
           return doc ? doc.querySelector(selectors) : document.querySelector(selectors);

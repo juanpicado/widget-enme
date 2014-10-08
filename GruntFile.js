@@ -2,13 +2,7 @@
 
 'use strict';
 
-var path = require('path');
-
-var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-
-var folderMount = function folderMount(connect, point) {
-    return connect['static'](path.resolve(point));
-};
+var server = require('./tests/server/app');
 
 module.exports = function(grunt) {
 
@@ -47,24 +41,6 @@ module.exports = function(grunt) {
             }
         },
 
-        // server
-
-        server: {
-            dev: {
-                options: {
-                    port: 3001,
-                    base: './',
-                    keepalive: false,
-                    middleware: function(connect, options) {
-                        return [
-                            lrSnippet,
-                            folderMount(connect, options.base)
-                        ];
-                    }
-                }
-            }
-        },
-
         uglify: {
             options: {
                 mangle: true,
@@ -75,6 +51,10 @@ module.exports = function(grunt) {
                     '<%= dirs.dist %>/widget.js': ['<%= dirs.build %>/*.js']
                 }
             }
+        },
+
+        mocha_phantomjs: {
+            all: ['tests/**/*.html']
         },
 
         /**
@@ -98,11 +78,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-mocha-phantomjs');
 
 
     // server task
     grunt.renameTask('connect', 'server');
-    grunt.registerTask('dev', ['clean', 'jshint', 'browserify']);
+    grunt.registerTask('dev', ['clean', 'jshint', 'browserify', 'mocha_phantomjs', 'uglify']);
     grunt.registerTask('default', ['dev']);
 
 };

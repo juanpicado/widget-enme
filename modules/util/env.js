@@ -1,12 +1,12 @@
 
 "use strict";
 
-    var f = window.navigator.userAgent;
+    var f = global.navigator.userAgent;
 
     var fn = {
 
         retina: function() {
-            return (window.devicePixelRatio || Math.round(window.screen.availWidth / document.documentElement.clientWidth)) > 1
+            return (global.devicePixelRatio || Math.round(global.screen.availWidth / document.documentElement.clientWidth)) > 1
         },
 
         anyIE: function() {
@@ -22,7 +22,7 @@
         },
 
         touch: function() {
-            return "ontouchstart" in window || /Opera Mini/.test(f) || navigator.msMaxTouchPoints > 0
+            return "ontouchstart" in global || /Opera Mini/.test(f) || navigator.msMaxTouchPoints > 0
         },
 
         cssTransitions: function(){

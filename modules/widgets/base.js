@@ -18,7 +18,7 @@ var fn = {
     createPollForm: function(widget) {
         return poll_form.render({
             widget : widget,
-            url : services.poll_form
+            url : services().poll_form
         }, function(widget, iframe, css) {
             var node = widget.widget.node;
             document.body.appendChild(iframe);
@@ -40,7 +40,7 @@ var fn = {
     createPollVote: function(widget) {
         return poll_votes.render({
             widget : widget,
-            url : services.poll_results
+            url : services().poll_results
         }, function(widget, iframe, css, afterRender) {
             var node = widget.widget.node;
             document.body.appendChild(iframe);
@@ -63,7 +63,7 @@ var fn = {
     createTpForm: function(widget) {
         return tweetpoll_form.render({
             widget : widget,
-            url : services.tp_poll_form
+            url : services().tp_poll_form
         }, function(widget, iframe, css) {
             var node = widget.widget.node;
             document.body.appendChild(iframe);
@@ -81,7 +81,7 @@ var fn = {
     createTpVote: function(widget) {
         return tweetpoll_votes.render({
             widget : widget,
-            url : services.tp_poll_votes
+            url : services().tp_poll_votes
         }, function(widget, iframe, css, afterRender) {
             var node = widget.widget.node;
             document.body.appendChild(iframe);
@@ -104,7 +104,7 @@ var fn = {
     createProfile: function(widget) {
         return profile.render({
             widget : widget,
-            url : services.user_profile
+            url : services().user_profile
         }, function(widget, iframe, css) {
             var node = widget.widget.node;
             document.body.appendChild(iframe);
