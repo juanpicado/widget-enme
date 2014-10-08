@@ -1,12 +1,15 @@
 Encuestame Embedded Widgets
 ===========
 
+[![Build Status](https://secure.travis-ci.org/encuestame/widget-enme.png)](http://travis-ci.org/encuestame/widget-enme)
+
+
 Is an implementation for embedded widgets for Encuestame.
 
 ####  Build
-	
+	npm install -g grunt-cli 
 	npm install
-	gulp
+	grunt
 
 
 #### Run the examples
