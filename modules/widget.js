@@ -16,16 +16,15 @@
 
 'use strict';
 
-
 if (!global.__enme_widget) {
     (function(document) {
 
         var _widget = {};
         _widget.callbacks = {};
 
-        _widget.host  = "http://192.168.0.12:8080/encuestame/";
+        _widget.host  = "http://localhost:3001/encuestame/";
+        _widget.initialized = false;
         global.__enme_widget = _widget;
-
             var base = require('./widgets/base'),
             util = require('./util/dom-utils'),
             render = require('./widgets/render'),
@@ -40,13 +39,22 @@ if (!global.__enme_widget) {
                 'a.enme-hashtag'  : base.createHashtag
             };
 
-            util.listen("load", window, function() {
-                render.findWidgets(widgets_selectors, function(data) {
-                    _.each(data, function(a,b){
-                        a._module(a);
+            var initialize_widgets = function() {
+                if (!_widget.initialized) {
+                    render.findWidgets(widgets_selectors, function (data) {
+                        _.each(data, function (a, b) {
+                            a._module(a);
+                        });
                     });
-                });
+                    _widget.initialized = true;
+                }
+            };
+
+            util.listen("load", window, function() {
+                initialize_widgets();
             });
+
+            _widget.init = initialize_widgets;
 
 
     })(document);

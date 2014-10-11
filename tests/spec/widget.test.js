@@ -16,8 +16,65 @@
 
 var assert = chai.assert;
 
-describe('Util test', function(){
-        it('__enme_widget is defined', function() {
-            assert.isDefined(__enme_widget, 'tea has been defined');
-        })
+var appendScripts = function(src) {
+        var scriptTag = document.createElement('SCRIPT');
+        scriptTag.src = src;
+        scriptTag.onload = function(){
+            console.log("dddsdsads");
+        };
+        document.body.appendChild(scriptTag);
+}
+
+describe('Widget Test', function(){
+    this.timeout(10000);
+    before( function(done){
+        assert.isDefined($, 'jquery is defined');
+        var body = $('body');
+        var content = $('<div id="content"></div>');
+        var tpform = $('<a class="enme-tp-form"> </a>', {});
+        var profile = $('<a class="enme-profile"> </a>', {});
+        var tpVote = $('<a class="enme-tp-vote"> </a>', {});
+        var pollVote = $('<a class="enme-poll-vote"> </a>', {});
+        var pollForm = $('<a class="enme-poll-form"> </a>', {});
+        content.append(tpform);
+        content.append(profile);
+        content.append(tpVote);
+        content.append(pollVote);
+        content.append(pollForm);
+        body.append(content);
+        var scr = function(d,s,id){
+            var js, fjs=d.getElementsByTagName(s)[0],
+                h=d.getElementsByTagName('head'),
+                p=/^http:/.test(d.location)?'http':'https';
+            if(!d.getElementById(id)){
+                js=d.createElement(s);
+                js.id=id;
+                js.src="../build/widget.js";
+                h[0].appendChild(js);
+                js.onload = function() {
+                    __enme_widget.init();
+                    setTimeout(function(){
+                        done();
+                    }, 4000);
+
+                }
+                fjs.parentNode.removeChild(fjs);
+            }
+        };
+        scr(document,"script","widget-enme-js")
+    });
+
+    after( function(){
+        $('#content').html('');
+    });
+
+    it('__enme_widget is defined', function() {
+            assert.isDefined(__enme_widget, '__enme_widget has been defined');
+    })
+    it('__enme_widget host', function() {
+        assert.isDefined(__enme_widget.host, '__enme_widget has been defined');
+    })
+    it('widgets rendered', function() {
+        assert.equal($('#content').find('iframe').length, 5, '4 widgets in the content div');
+    })
 });
