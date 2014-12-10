@@ -16,13 +16,12 @@
 
 'use strict';
 
-if (!global.__enme_widget) {
+if (typeof global.__enme_widget != "undefined" && global.__enme_widget.host) {
     (function(document) {
 
         var _widget = {};
         _widget.callbacks = {};
-
-        _widget.host  = "http://localhost:3001/encuestame/";
+        _widget.host  = global.__enme_widget.host;
         _widget.initialized = false;
         global.__enme_widget = _widget;
             var base = require('./widgets/base'),

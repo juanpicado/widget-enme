@@ -66,23 +66,34 @@
 
         <div class="col-md-4">
             <p>
+
                 <div  class="wwidget2">
-                    <a data-id="82" class="enme-tp-form"
-                       data-url="http://localhost:8080/encuestame/tweetpoll/2/ds" target="_blank"></a>
-                    <script>
-                        !function(d,s,id){
-                            var js, fjs=d.getElementsByTagName(s)[0],
-                                    h=d.getElementsByTagName('head'),
-                                    p=/^http:/.test(d.location)?'http':'https';
-                            if(!d.getElementById(id)){
-                                js=d.createElement(s);
-                                js.id=id;
-                                js.src="../build/widget.js";
-                                h[0].appendChild(js);
-                                fjs.parentNode.removeChild(fjs);
-                            }
-                        }(document,"script","widget-enme-js");
-                    </script>
+                    <!--<a data-id="82" class="enme-tp-form"-->
+                       <!--data-url="http://localhost:8080/encuestame/tweetpoll/2/ds" target="_blank"></a>-->
+                    <!--<script>-->
+                        <!--!function(d,s,id){-->
+                            <!--var js, fjs=d.getElementsByTagName(s)[0],-->
+                                    <!--h=d.getElementsByTagName('head'),-->
+                                    <!--p=/^http:/.test(d.location)?'http':'https';-->
+                            <!--if(!d.getElementById(id)){-->
+                                <!--js=d.createElement(s);-->
+                                <!--js.id=id;-->
+                                <!--js.src="../build/widget.js";-->
+                                <!--h[0].appendChild(js);-->
+                                <!--fjs.parentNode.removeChild(fjs);-->
+                            <!--}-->
+                        <!--}(document,"script","widget-enme-js");-->
+                    <!--</script>-->
+            <a data-id="25" class="enme-tp-form" data-url="http://www.encuestame.org/encuestame-business" target="_blank"/>
+            <script> !function(d,s,id){
+                var js, fjs=d.getElementsByTagName(s)[0], p=/^http:/.test(d.location)?'http':'https', _
+                __enme_widget={host:p+":///localhost:8080/encuestame/"};
+                if(!d.getElementById(id)){
+                    js=d.createElement(s);
+                    js.id=id;js.src=p+":///localhost:8080/encuestame/resources/js/widget/dist/widget.js";
+                    fjs.parentNode.insertBefore(js,fjs);
+                }
+            }(document,"script","widget-enme-js");</script>
 
             <a data-id="3" class="enme-profile"
                data-url="http://localhost:8080/encuestame/tweetpoll/2/ds" target="_blank"></a>
